@@ -1,6 +1,6 @@
 PRAGMA foreign_keys = ON;
 CREATE TABLE users (
-  id INT PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT NOT NULL UNIQUE COLLATE NOCASE,
   password_hash TEXT NOT NULL,
   created_at TEXT NOT NULL,
@@ -8,9 +8,9 @@ CREATE TABLE users (
 );
 
 CREATE TABLE rooms (
-  id INT PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL UNIQUE COLLATE NOCASE,
-  owner_id INT NOT NULL,
+  owner_id INTEGER NOT NULL,
   created_at TEXT NOT NULL,
   icon_hash TEXT,
   password_hash TEXT,
@@ -18,17 +18,17 @@ CREATE TABLE rooms (
 );
 
 CREATE TABLE rooms_users (
-  room_id INT NOT NULL,
-  user_id INT NOT NULL,
+  room_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
   PRIMARY KEY (room_id, user_id),
   FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE messages (
-  id INT PRIMARY KEY AUTOINCREMENT,
-  room_id INT NOT NULL,
-  user_id INT NOT NULL,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  room_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
   content TEXT NOT NULL,
   timestamp TEXT NOT NULL,
   FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE,
